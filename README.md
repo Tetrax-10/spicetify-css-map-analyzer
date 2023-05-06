@@ -4,7 +4,7 @@ Analyzes Spicetify's css-map.json and prints mapped, unmapped classes for curren
 
 <br />
 
-### Getting Started (installation) :
+## Getting Started (installation) :
 
 -   Clone this repository `git clone https://github.com/Tetrax-10/spicetify-css-map-analyzer`
 -   Make sure [NodeJS](https://nodejs.org/) is installed
@@ -15,7 +15,7 @@ Analyzes Spicetify's css-map.json and prints mapped, unmapped classes for curren
 
 <br />
 
-### Usage :
+## Usage :
 
 Run this command to analyze and print unmapped classes
 
@@ -34,3 +34,19 @@ Run custom combination commands like this `npm run analyzer -- [args]`
 ```sh
 npm run analyzer -- --mapped --sort --out
 ```
+
+<br />
+
+## Outputs :
+
+### Analyzed report
+
+![analyzed result](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/analyzed-result.png)
+
+### Generated output files
+
+![analyzed result](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/generate-output-files.png)
+
+### Eg: Unmapped classes file
+
+![analyzed result](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/unmapped-file.png)
