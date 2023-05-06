@@ -1,0 +1,27 @@
+{
+    "name": "spicetify-css-map-analyzer",
+    "description": "Analyzes Spicetify's css-map.json and prints mapped, unmapped classes for current Spotify version",
+    "author": "Tetrax-10",
+    "license": "MIT",
+    "type": "module",
+    "main": "src/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Tetrax-10/spicetify-css-map-analyzer.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Tetrax-10/spicetify-css-map-analyzer/issues"
+    },
+    "scripts": {
+        "format": "prettier --write .",
+        "start": "node src/index.js --unmapped --sort --out",
+        "analyzer": "node src/index.js"
+    },
+    "dependencies": {
+        "chalk": "^5.2.0",
+        "commander": "^10.0.1"
+    },
+    "devDependencies": {
+        "prettier": "^2.8.8"
+    }
+}

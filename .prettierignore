@@ -1,0 +1,6 @@
+dist
+out
+LICENSE
+package-lock.json
+node_modules
+*.txt
