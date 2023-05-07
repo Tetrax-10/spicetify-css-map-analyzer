@@ -23,8 +23,8 @@ program
         return
     }
 
-    console.log(chalk.cyan("Trying to backup Spotify..."))
-    await Shell.waitForCommandToFinish("spicetify backup apply")
+    console.log(chalk.cyan("Backing up Spotify..."))
+    await Shell.waitForCommandToFinish("spicetify backup apply -q")
 
     await Glob.loadLocalContents()
 

@@ -30,7 +30,7 @@ const Logger = (() => {
         console.log(chalk.red(`Unmapped classes : ${totalUnmappedClasses}`))
         console.log(chalk.green(`Mapped classes : ${totalMappedClasses}`))
         console.log()
-        console.log(chalk.yellow(`Mapped ${Math.floor((totalMappedClasses / totalClasses) * 100)}% of mappable classes`))
+        console.log(chalk.yellow(`Spicetify devs have Mapped ${Math.floor((totalMappedClasses / totalClasses) * 100)}% of mappable classes`))
         console.log()
     }
 

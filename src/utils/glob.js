@@ -26,9 +26,15 @@ const Glob = (() => {
             ) {
                 const fileContents = getFileContents(filePath)
 
-                Shared.xpui.contents += fileContents + "\n"
+                if (fileExtension === ".css") {
+                    Shared.xpui.cssContents += fileContents + "\n"
+                } else {
+                    Shared.xpui.jsContents += fileContents + "\n"
+                }
             }
         })
+
+        Shared.xpui.contents = Shared.xpui.cssContents + Shared.xpui.jsContents
     }
 
     async function loadLocalCssMap() {
