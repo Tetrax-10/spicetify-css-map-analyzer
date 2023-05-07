@@ -1,5 +1,12 @@
 const Shared = {
     args: {}, // program arguments
+    path: {
+        spicetifyPath: "",
+        spicetifyUserDataPath: "",
+        xpuiPath: "",
+        cssMap: "",
+    },
+    spicetifyConfig: {}, // config-xpui.ini
     xpui: {
         contents: "", // all contents inside xpui folder
         jsContents: "", // all .js contents inside xpui folder

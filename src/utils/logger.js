@@ -12,11 +12,11 @@ const Logger = (() => {
         }
 
         if (Shared.args.unmapped) {
-            fs.writeFileSync("./out/unmapped.txt", Shared.latestCssMap.classes.unmapped.join("\n"))
+            fs.writeFileSync(`./out/unmapped-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.latestCssMap.classes.unmapped.join("\n"))
         } else if (Shared.args.mapped) {
-            fs.writeFileSync("./out/mapped.txt", Shared.latestCssMap.classes.mapped.join("\n"))
+            fs.writeFileSync(`./out/mapped-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.latestCssMap.classes.mapped.join("\n"))
         } else {
-            fs.writeFileSync("./out/all-classes.txt", Shared.latestCssMap.classes.all.join("\n"))
+            fs.writeFileSync(`./out/all-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.latestCssMap.classes.all.join("\n"))
         }
     }
 

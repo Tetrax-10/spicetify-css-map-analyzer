@@ -19,7 +19,8 @@
     },
     "dependencies": {
         "chalk": "^5.2.0",
-        "commander": "^10.0.1"
+        "commander": "^10.0.1",
+        "ini": "^4.1.0"
     },
     "devDependencies": {
         "prettier": "^2.8.8"

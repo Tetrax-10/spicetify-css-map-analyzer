@@ -1,6 +1,7 @@
 import chalk from "chalk"
 import { program } from "commander"
 
+import Path from "./utils/path.js"
 import Glob from "./utils/glob.js"
 import Shell from "./utils/shell.js"
 import Shared from "./shared/shared.js"
@@ -26,7 +27,9 @@ program
     console.log(chalk.cyan("Backing up Spotify..."))
     await Shell.waitForCommandToFinish("spicetify backup apply -q")
 
-    await Glob.loadLocalContents()
+    await Path.getAllPaths()
+
+    Glob.loadLocalContents()
 
     Shared.latestCssMap.reversedData = Utils.reverseObject(Shared.originalCssMap.data)
     Shared.latestCssMap.data = Utils.reverseObject(Shared.latestCssMap.reversedData)

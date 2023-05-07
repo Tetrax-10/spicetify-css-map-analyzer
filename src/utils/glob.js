@@ -3,18 +3,17 @@ import path from "path"
 import chalk from "chalk"
 
 import Shared from "../shared/shared.js"
-import Path from "./path.js"
 
 const Glob = (() => {
     function getFileContents(filePath) {
         return fs.readFileSync(filePath, "utf-8")
     }
 
-    function loadXpuiFolderContents(folderPath) {
+    function loadXpuiFolderContents() {
         console.log(chalk.cyan("Reading Spotify files..."))
 
-        fs.readdirSync(folderPath).forEach((file) => {
-            const filePath = path.join(folderPath, file)
+        fs.readdirSync(Shared.path.xpuiPath).forEach((file) => {
+            const filePath = path.join(Shared.path.xpuiPath, file)
             const fileExtension = path.extname(file)
 
             if (
@@ -37,16 +36,16 @@ const Glob = (() => {
         Shared.xpui.contents = Shared.xpui.cssContents + Shared.xpui.jsContents
     }
 
-    async function loadLocalCssMap() {
+    function loadLocalCssMap() {
         console.log(chalk.cyan("Reading css-map.json"))
 
-        const rawCssMapContent = getFileContents(await Path.get.cssMap)
+        const rawCssMapContent = getFileContents(Shared.path.cssMap)
         Shared.originalCssMap.data = JSON.parse(rawCssMapContent)
     }
 
-    async function loadLocalContents() {
+    function loadLocalContents() {
         // loads xpui contents
-        loadXpuiFolderContents(await Path.get.xpui)
+        loadXpuiFolderContents()
         // loads local css-map contents
         loadLocalCssMap()
     }
