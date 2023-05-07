@@ -1,7 +1,6 @@
 import chalk from "chalk"
 import { program } from "commander"
 
-import Path from "./utils/path.js"
 import Glob from "./utils/glob.js"
 import Shell from "./utils/shell.js"
 import Shared from "./shared/shared.js"
@@ -27,13 +26,15 @@ program
     console.log(chalk.cyan("Trying to backup Spotify..."))
     await Shell.waitForCommandToFinish("spicetify backup apply")
 
-    Glob.loadXpuiFolderContents(await Path.get.xpui)
+    await Glob.loadLocalContents()
 
-    await Glob.loadLocalCssMap()
+    Shared.latestCssMap.reversedData = Utils.reverseObject(Shared.originalCssMap.data)
+    Shared.latestCssMap.data = Utils.reverseObject(Shared.latestCssMap.reversedData)
+    Shared.latestCssMap.classes.all = Shared.args.sort
+        ? Object.keys(Shared.latestCssMap.reversedData).sort()
+        : Object.keys(Shared.latestCssMap.reversedData)
 
-    Shared.latestCssMap = Utils.reverseObject(Shared.cssMap)
-
-    Utils.printUnmappedClasses(Shared.folderContents, Object.keys(Shared.latestCssMap))
+    Utils.printUnmappedClasses(Shared.xpui.contents, Shared.latestCssMap.classes.all)
 
     Logger.logOutputToFile()
 

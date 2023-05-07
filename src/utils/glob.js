@@ -26,7 +26,7 @@ const Glob = (() => {
             ) {
                 const fileContents = getFileContents(filePath)
 
-                Shared.folderContents += fileContents + "\n"
+                Shared.xpui.contents += fileContents + "\n"
             }
         })
     }
@@ -35,13 +35,18 @@ const Glob = (() => {
         console.log(chalk.cyan("Reading css-map.json"))
 
         const rawCssMapContent = getFileContents(await Path.get.cssMap)
-        Shared.cssMap = JSON.parse(rawCssMapContent)
+        Shared.originalCssMap.data = JSON.parse(rawCssMapContent)
+    }
+
+    async function loadLocalContents() {
+        // loads xpui contents
+        loadXpuiFolderContents(await Path.get.xpui)
+        // loads local css-map contents
+        loadLocalCssMap()
     }
 
     return {
-        getFileContents: getFileContents,
-        loadXpuiFolderContents: loadXpuiFolderContents,
-        loadLocalCssMap: loadLocalCssMap,
+        loadLocalContents: loadLocalContents,
     }
 })()
 
