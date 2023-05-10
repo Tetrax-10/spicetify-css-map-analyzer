@@ -1,4 +1,5 @@
 import chalk from "chalk"
+import prettier from "prettier"
 
 import Shared from "../shared/shared.js"
 
@@ -15,29 +16,44 @@ const Utils = (() => {
         return reversed
     }
 
-    function printUnmappedClasses(contentData, subStringData) {
-        console.log()
+    function getMostRepeatedValues(obj) {
+        const result = {}
 
-        subStringData.forEach((substring) => {
-            if (contentData.indexOf(substring) === -1) {
-                Shared.latestCssMap.classes.unmapped.push(substring)
-                if ((Shared.args.unmapped && !Shared.args.mapped) || (!Shared.args.unmapped && !Shared.args.mapped)) {
-                    console.log(chalk.red(substring))
-                }
-            } else {
-                Shared.latestCssMap.classes.mapped.push(substring)
-                if (Shared.args.mapped) {
-                    console.log(chalk.green(substring))
-                } else if (!Shared.args.unmapped) {
-                    console.log(chalk.dim(substring))
-                }
+        for (const key in obj) {
+            const values = obj[key]
+
+            const countMap = new Map()
+
+            for (const value of values) {
+                const count = (countMap.get(value) || 0) + 1
+                countMap.set(value, count)
             }
+
+            const maxCount = Math.max(...countMap.values())
+            const mostRepeatedValues = Array.from(countMap.entries())
+                .filter(([value, count]) => count === maxCount)
+                .map(([value, count]) => value)
+
+            result[key] = mostRepeatedValues.length === 1 ? mostRepeatedValues[0] : mostRepeatedValues
+        }
+
+        return result
+    }
+
+    function formatContent(content, parser) {
+        return prettier.format(content, {
+            parser: parser,
+            tabWidth: 4,
+            useTabs: true,
+            semi: true,
+            singleQuote: false,
         })
     }
 
     return {
         reverseObject: reverseObject,
-        printUnmappedClasses: printUnmappedClasses,
+        getMostRepeatedValues: getMostRepeatedValues,
+        formatContent: formatContent,
     }
 })()
 

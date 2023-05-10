@@ -3,6 +3,7 @@ import path from "path"
 import chalk from "chalk"
 
 import Shared from "../shared/shared.js"
+import Utils from "./utils.js"
 
 const Glob = (() => {
     function getFileContents(filePath) {
@@ -10,7 +11,7 @@ const Glob = (() => {
     }
 
     function loadXpuiFolderContents() {
-        console.log(chalk.cyan("Reading Spotify files..."))
+        console.log(chalk.blue("Reading Spotify files..."))
 
         fs.readdirSync(Shared.path.xpuiPath).forEach((file) => {
             const filePath = path.join(Shared.path.xpuiPath, file)
@@ -37,7 +38,7 @@ const Glob = (() => {
     }
 
     function loadLocalCssMap() {
-        console.log(chalk.cyan("Reading css-map.json"))
+        console.log(chalk.blue("Reading css-map.json..."))
 
         const rawCssMapContent = getFileContents(Shared.path.cssMap)
         Shared.originalCssMap.data = JSON.parse(rawCssMapContent)
@@ -48,10 +49,28 @@ const Glob = (() => {
         loadXpuiFolderContents()
         // loads local css-map contents
         loadLocalCssMap()
+
+        console.log()
+    }
+
+    function saveObjectAsJSON(filePath, object, format = false) {
+        let jsonFileData
+
+        if (format) {
+            jsonFileData = Utils.formatContent(JSON.stringify(object), "json")
+        } else {
+            jsonFileData = JSON.stringify(object)
+        }
+
+        fs.writeFile(filePath, jsonFileData, (err) => {
+            if (err) console.log(chalk.red(`Error while saving ${path.basename(filePath)} !`))
+        })
     }
 
     return {
+        getFileContents: getFileContents,
         loadLocalContents: loadLocalContents,
+        saveObjectAsJSON: saveObjectAsJSON,
     }
 })()
 

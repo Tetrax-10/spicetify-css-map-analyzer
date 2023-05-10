@@ -2,11 +2,11 @@ import path from "path"
 import fs from "fs"
 import ini from "ini"
 
-import Shell from "./shell.js"
 import Shared from "../shared/shared.js"
+import Shell from "./shell.js"
 
 const Path = (() => {
-    async function getAllPaths() {
+    async function loadAllNeededPaths() {
         Shared.path.spicetifyPath = (await Shell.get("spicetify path")).split(/\r?\n/).pop()
         Shared.path.spicetifyUserDataPath = (await Shell.get("spicetify path userdata")).split(/\r?\n/).pop()
 
@@ -17,7 +17,7 @@ const Path = (() => {
     }
 
     return {
-        getAllPaths: getAllPaths,
+        load: loadAllNeededPaths,
     }
 })()
 
