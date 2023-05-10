@@ -80,6 +80,8 @@ Lists the `mapped/unmapped/all` classes according to the command you ran. Also t
 
 ![analyzed result](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/analyzed-result.png)
 
+<br />
+
 ### Generated output files
 
 These output files contains `mapped/unmapped/all` classes.
