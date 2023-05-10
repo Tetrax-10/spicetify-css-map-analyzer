@@ -3,7 +3,6 @@ import path from "path"
 import chalk from "chalk"
 
 import Shared from "../shared/shared.js"
-import Utils from "./utils.js"
 
 const Glob = (() => {
     function getFileContents(filePath) {
@@ -53,24 +52,8 @@ const Glob = (() => {
         console.log()
     }
 
-    function saveObjectAsJSON(filePath, object, format = false) {
-        let jsonFileData
-
-        if (format) {
-            jsonFileData = Utils.formatContent(JSON.stringify(object), "json")
-        } else {
-            jsonFileData = JSON.stringify(object)
-        }
-
-        fs.writeFile(filePath, jsonFileData, (err) => {
-            if (err) console.log(chalk.red(`Error while saving ${path.basename(filePath)} !`))
-        })
-    }
-
     return {
-        getFileContents: getFileContents,
         loadLocalContents: loadLocalContents,
-        saveObjectAsJSON: saveObjectAsJSON,
     }
 })()
 

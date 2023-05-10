@@ -2,36 +2,8 @@ import fs from "fs"
 import chalk from "chalk"
 
 import Shared from "../shared/shared.js"
-import Glob from "../utils/glob.js"
-import Utils from "../utils/utils.js"
-import ExtractorUtils from "./extractorUtils.js"
 
-const Extractor = (() => {
-    function extractSpotifyData() {
-        Glob.loadLocalContents()
-
-        Shared.latestCssMap.reversedData = Utils.reverseObject(Shared.originalCssMap.data)
-        Shared.latestCssMap.data = Utils.reverseObject(Shared.latestCssMap.reversedData)
-        Shared.latestCssMap.classes.all = Shared.args.sort
-            ? Object.keys(Shared.latestCssMap.reversedData).sort()
-            : Object.keys(Shared.latestCssMap.reversedData)
-
-        separateMappedAndUnmappedClasses()
-
-        const totalClasses = Object.keys(Shared.latestCssMap.reversedData).length
-        const totalUnmappedClasses = Object.keys(Shared.latestCssMap.classes.unmapped).length
-        const totalMappedClasses = Object.keys(Shared.latestCssMap.classes.mapped).length
-
-        if (Shared.args.unmapped || Shared.args.mapped) {
-            console.log(`Total mappable classes : ${totalClasses}`)
-            console.log(chalk.red(`Unmapped classes : ${totalUnmappedClasses}`))
-            console.log(chalk.green(`Mapped classes : ${totalMappedClasses}\n`))
-            console.log(chalk.yellow(`Spicetify devs have Mapped ${Math.floor((totalMappedClasses / totalClasses) * 100)}% of mappable classes\n`))
-        }
-
-        logClassesToOutFile()
-    }
-
+const AnalyzerUtils = (() => {
     function separateMappedAndUnmappedClasses() {
         console.log(chalk.yellow(`Analyzing Spotify ${Shared.spicetifyConfig.Backup.version}'s css with css-map.json\n`))
 
@@ -66,9 +38,9 @@ const Extractor = (() => {
     }
 
     return {
-        extractSpotifyData: extractSpotifyData,
-        extractRemapData: ExtractorUtils.extractRemapData,
+        separateMappedAndUnmappedClasses: separateMappedAndUnmappedClasses,
+        logClassesToOutFile: logClassesToOutFile,
     }
 })()
 
-export default Extractor
+export default AnalyzerUtils

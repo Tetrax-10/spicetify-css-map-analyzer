@@ -26,12 +26,12 @@ const Shared = {
     },
     regex: {
         // detects hash classes eg: RbsCNNM9a0WkFCM2UzBA
-        extractHashClass: /(?<=\.)(?![^\{]*\})[a-zA-Z0-9_]{20}(?<!-)\b/g,
+        extractHashClass: /(?<=\.)(?![^{]*\})[a-zA-Z0-9_]{20}(?<!-)\b/g,
         // detects mapped classes eg: main-addButton-button
         extractMappedClass:
-            /(?<=\.)\b(album|artist|collection|concert|desktopmodals|desktoproutes|folder|lyrics|main|playback|playlist|profile|progress|queue|search|show|view|x)\b([a-zA-Z0-9_-]+)(?![^\{]*\})/g,
+            /(?<=\.)\b(album|artist|collection|concert|desktopmodals|desktoproutes|folder|lyrics|main|playback|playlist|profile|progress|queue|search|show|view|x)\b([a-zA-Z0-9_-]+)(?![^{]*\})/g,
         // detects class name
-        extractClass: /(?<=\.)([a-zA-Z0-9_-]+)(?![^\{]*\})/g,
+        extractClass: /(?<=\.)([a-zA-Z0-9_-]+)(?![^{]*\})/g,
     },
     remap: {
         version: {

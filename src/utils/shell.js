@@ -1,3 +1,5 @@
+import chalk from "chalk"
+
 import { exec } from "child_process"
 import { promisify } from "util"
 
@@ -7,7 +9,9 @@ const Shell = (() => {
 
         try {
             await promisedExec(command)
-        } catch {}
+        } catch {
+            console.log(chalk.red("Error: Cant promisify 'exec' from 'child_process'"))
+        }
     }
 
     function getOutput(command) {
