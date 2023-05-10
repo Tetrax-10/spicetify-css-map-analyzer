@@ -10,7 +10,7 @@ Analyzes Spicetify's css-map.json and prints mapped, unmapped classes for curren
 -   Make sure [NodeJS](https://nodejs.org/) is installed
 -   Run `npm install` to install dependencies
 -   Make sure you have latest Spotify installed
--   Also make sure you installed latest commit version of [Spicetify](https://github.com/spicetify/spicetify-cli) (Spicetify should be vDev)
+-   Also make sure you installed latest commit version of [Spicetify](https://github.com/spicetify/spicetify-cli)
 -   Done !
 
 <details>
@@ -38,11 +38,25 @@ If you want to analyze older versions of Spotify, then install the appropriate v
 
 ## Usage :
 
-Run this command to analyze and print unmapped classes
+To analyze and print unmapped classes in `css-map.json` for currently installed Spotify and Spicetify versions
 
 ```sh
-npm start
+npm run analyze-unmapped-css
 ```
+
+To analyze and print mapped classes in `css-map.json` for currently installed Spotify and Spicetify versions
+
+```sh
+npm run analyze-mapped-css
+```
+
+To analyze and print all classes in `css-map.json` for currently installed Spotify and Spicetify versions
+
+```sh
+npm run analyze-css-map
+```
+
+<br />
 
 Run help command to see available options
 
@@ -62,9 +76,13 @@ npm run analyzer -- --mapped --sort --out
 
 ### Analyzed report
 
+Lists the `mapped/unmapped/all` classes according to the command you ran. Also tells how much percent of `css-map.json` got mapped for currently installed Spotify and Spicetify version.
+
 ![analyzed result](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/analyzed-result.png)
 
 ### Generated output files
+
+These output files contains `mapped/unmapped/all` classes. These files are useful to compare what got mapped or unmapped when comparing with other Spotify versions.
 
 ![analyzed result](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/generate-output-files.png)
 
