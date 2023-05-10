@@ -82,10 +82,12 @@ Lists the `mapped/unmapped/all` classes according to the command you ran. Also t
 
 ### Generated output files
 
-These output files contains `mapped/unmapped/all` classes. These files are useful to compare what got mapped or unmapped when comparing with other Spotify versions.
+These output files contains `mapped/unmapped/all` classes.
 
-![analyzed result](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/generate-output-files.png)
+![output files](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/generate-output-files.png)
 
-### Eg: Unmapped classes file
+These files are useful for comparing what got unmapped when comparing them with other versions of Spotify.
 
-![analyzed result](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/unmapped-file.png)
+**Eg: Comparing Spotify `1.2.10.760.g52970952` and `1.2.11.914.gd3175972`**
+
+![compare output files](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/compare-output-files.png)
