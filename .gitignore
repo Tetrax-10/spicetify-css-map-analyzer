@@ -1,10 +1,6 @@
 dev
 .vscode
 node_modules
-dist
 out
 package-lock.json
-remap-data
-cached
-css-map**.json
 *.txt

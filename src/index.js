@@ -2,7 +2,6 @@ import chalk from "chalk"
 import { program } from "commander"
 
 import Shared from "./shared/shared.js"
-import Args from "./utils/args.js"
 import Shell from "./utils/shell.js"
 import Path from "./utils/path.js"
 import Analyzer from "./analyzer/analyzer.js"
@@ -18,10 +17,8 @@ program
 ;(async () => {
     Shared.args = program.opts()
 
-    if (!Args.isValid()) return
-
     console.log(chalk.green("Backing up Spotify...\n"))
-    await Shell.waitForCommandToFinish("spicetify backup apply -q")
+    await Shell.execute("spicetify backup apply -q")
 
     await Path.load()
 

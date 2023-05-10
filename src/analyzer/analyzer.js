@@ -1,13 +1,12 @@
 import chalk from "chalk"
 
 import Shared from "../shared/shared.js"
-import Glob from "../utils/glob.js"
 import Utils from "../utils/utils.js"
 import AnalyzerUtils from "./analyzerUtils.js"
 
 const Analyzer = (() => {
     function analyze() {
-        Glob.loadLocalContents()
+        AnalyzerUtils.glob.loadLocalContents()
 
         Shared.latestCssMap.reversedData = Utils.reverseObject(Shared.originalCssMap.data)
         Shared.latestCssMap.data = Utils.reverseObject(Shared.latestCssMap.reversedData)

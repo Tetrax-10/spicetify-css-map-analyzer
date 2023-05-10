@@ -2,6 +2,7 @@ import fs from "fs"
 import chalk from "chalk"
 
 import Shared from "../shared/shared.js"
+import AnalyzerGlob from "./analyzerGlob.js"
 
 const AnalyzerUtils = (() => {
     function separateMappedAndUnmappedClasses() {
@@ -40,6 +41,9 @@ const AnalyzerUtils = (() => {
     return {
         separateMappedAndUnmappedClasses: separateMappedAndUnmappedClasses,
         logClassesToOutFile: logClassesToOutFile,
+        glob: {
+            loadLocalContents: AnalyzerGlob.loadLocalContents,
+        },
     }
 })()
 

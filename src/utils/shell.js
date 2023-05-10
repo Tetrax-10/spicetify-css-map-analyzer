@@ -1,17 +1,18 @@
+import { exec } from "child_process"
 import chalk from "chalk"
 
-import { exec } from "child_process"
-import { promisify } from "util"
-
 const Shell = (() => {
-    async function waitForCommandToFinish(command) {
-        const promisedExec = promisify(exec)
-
-        try {
-            await promisedExec(command)
-        } catch {
-            console.log(chalk.red("Error: Cant promisify 'exec' from 'child_process'"))
-        }
+    function waitForCommandToFinish(command) {
+        return new Promise((resolve, reject) => {
+            exec(command, (error) => {
+                if (error) {
+                    console.error(chalk.red(error))
+                    reject(error)
+                } else {
+                    resolve()
+                }
+            })
+        })
     }
 
     function getOutput(command) {
@@ -27,7 +28,7 @@ const Shell = (() => {
     }
 
     return {
-        waitForCommandToFinish: waitForCommandToFinish,
+        execute: waitForCommandToFinish,
         get: getOutput,
     }
 })()
