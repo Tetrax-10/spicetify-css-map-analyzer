@@ -21,7 +21,6 @@
         "no-undef": "error",
         "object-shorthand": ["warn", "never"],
         "no-underscore-dangle": "error",
-        "camelcase": ["error", { "allow": ["color_scheme"] }],
         "no-eval": "error",
         "import/no-useless-path-segments": ["error", { "noUselessIndex": true }],
         "no-case-declarations": "off",

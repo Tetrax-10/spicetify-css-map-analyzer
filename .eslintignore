@@ -1,2 +1,4 @@
 dev
 dist
+out
+node_modules
