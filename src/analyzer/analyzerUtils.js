@@ -11,9 +11,17 @@ const AnalyzerUtils = (() => {
         Shared.latestCssMap.classes.all.forEach((mappedClass) => {
             // if -1 then substring is not present in the content
             if (Shared.xpui.contents.indexOf(mappedClass) === -1) {
+                if (Shared.latestCssMap.classes.deprecated.includes(mappedClass)) return
+
                 Shared.latestCssMap.classes.unmapped.push(mappedClass)
                 if (Shared.args.unmapped) console.log(chalk.red(mappedClass))
             } else {
+                if (Shared.latestCssMap.classes.deprecated.includes(mappedClass)) {
+                    Shared.latestCssMap.classes.reimplemented.push(mappedClass)
+                } else if (Shared.latestCssMap.classes.maybeDeprecated.includes(mappedClass)) {
+                    Shared.latestCssMap.classes.notDeprecated.push(mappedClass)
+                }
+
                 Shared.latestCssMap.classes.mapped.push(mappedClass)
                 if (Shared.args.mapped) console.log(chalk.green(mappedClass))
             }

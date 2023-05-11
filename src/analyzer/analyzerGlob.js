@@ -40,11 +40,18 @@ const AnalyzerGlob = (() => {
         Shared.originalCssMap.data = JSON.parse(rawCssMapContent)
     }
 
+    function loadDeprecatedCssMap() {
+        Shared.latestCssMap.classes.deprecated = Glob.getJsonObject("./src/public/deprecated-css-map.json")
+        Shared.latestCssMap.classes.maybeDeprecated = Glob.getJsonObject("./src/public/may-be-deprecated-css-map.json")
+    }
+
     function loadLocalContents() {
         // loads xpui contents
         loadXpuiFolderContents()
         // loads local css-map contents
         loadLocalCssMap()
+
+        loadDeprecatedCssMap()
 
         console.log()
     }
