@@ -8,9 +8,12 @@ const AnalyzerUtils = (() => {
     function separateMappedAndUnmappedClasses() {
         console.log(chalk.yellow(`Analyzing Spotify ${Shared.spicetifyConfig.Backup.version}'s css with css-map.json\n`))
 
+        function getAbsoluteRegex(str) {
+            return new RegExp("(?<!\\w|-)" + str + "(?!\\w|-)")
+        }
+
         Shared.latestCssMap.classes.all.forEach((mappedClass) => {
-            // if -1 then substring is not present in the content
-            if (Shared.xpui.contents.indexOf(mappedClass) === -1) {
+            if (Shared.xpui.contents.match(getAbsoluteRegex(mappedClass)) === null) {
                 if (Shared.latestCssMap.classes.deprecated.includes(mappedClass)) return
 
                 Shared.latestCssMap.classes.unmapped.push(mappedClass)
