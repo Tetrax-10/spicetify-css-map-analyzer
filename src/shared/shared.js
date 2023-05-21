@@ -1,8 +1,8 @@
 const Shared = {
     args: {}, // program arguments
     path: {
-        spicetifyPath: "", // spicetify cli path
-        spicetifyUserDataPath: "", // spicetify userdata path
+        spicetifyPath: "", // spicetify path
+        spicetifyUserDataPath: "", // spicetify path userdata
         xpuiPath: "", // xpui folder
         cssMap: "", // css-map.json
     },
@@ -11,6 +11,11 @@ const Shared = {
         contents: "", // all contents inside xpui folder
         jsContents: "", // all .js contents inside xpui folder
         cssContents: "", // all .css contents inside xpui folder
+    },
+    theme: {
+        css: "",
+        hashClasses: [],
+        filteredCssMap: {},
     },
     originalCssMap: {
         data: {}, // css-map.json as object
@@ -27,6 +32,9 @@ const Shared = {
             maybeDeprecated: [], // mappable classes that may be deprecated (removed from Spotify) may-be-deprecated-css-map.json
             notDeprecated: [], // if Spotify reverts that deprecated class
         },
+    },
+    regex: {
+        extractHashClass: /(?<=\.)(?![^{]*\})[a-zA-Z0-9_]{20}(?<!-)\b/g, // detects hash classes eg: RbsCNNM9a0WkFCM2UzBA
     },
 }
 

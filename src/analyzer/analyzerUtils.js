@@ -3,6 +3,7 @@ import chalk from "chalk"
 
 import Shared from "../shared/shared.js"
 import AnalyzerGlob from "./analyzerGlob.js"
+import Glob from "../utils/glob.js"
 
 const AnalyzerUtils = (() => {
     function separateMappedAndUnmappedClasses() {
@@ -33,27 +34,45 @@ const AnalyzerUtils = (() => {
         if (Shared.args.unmapped || Shared.args.mapped) console.log()
     }
 
+    function analyzeThemesMappableClasses() {
+        Shared.theme.hashClasses = Shared.theme.css.match(Shared.regex.extractHashClass)
+
+        Shared.theme.hashClasses.forEach((hashClass) => {
+            if (Shared.latestCssMap.data.hasOwnProperty(hashClass)) {
+                Shared.theme.filteredCssMap[hashClass] = Shared.latestCssMap.data[hashClass]
+            }
+        })
+    }
+
     function logClassesToOutFile() {
         if (!Shared.args.out) return
 
-        if (!fs.existsSync("./out") && (Shared.args.unmapped || Shared.args.mapped)) {
+        if (!fs.existsSync("./out")) {
             fs.mkdirSync("./out")
         }
 
-        if (Shared.args.unmapped && !Shared.args.mapped) {
+        if (Shared.args.unmapped) {
             fs.writeFileSync(`./out/unmapped-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.latestCssMap.classes.unmapped.join("\n"))
-        } else if (!Shared.args.unmapped && Shared.args.mapped) {
+        }
+        if (Shared.args.mapped) {
             fs.writeFileSync(`./out/mapped-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.latestCssMap.classes.mapped.join("\n"))
-        } else if (Shared.args.unmapped && Shared.args.mapped) {
+        }
+        if (Shared.args.unmapped && Shared.args.mapped) {
             fs.writeFileSync(`./out/all-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.latestCssMap.classes.all.join("\n"))
+        }
+        if (Shared.args.theme) {
+            fs.writeFileSync(`./out/theme-hash-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.theme.hashClasses.join("\n"))
+            Glob.write.json(`./out/mappable-theme-hash-classes-${Shared.spicetifyConfig.Backup.version}.json`, Shared.theme.filteredCssMap)
         }
     }
 
     return {
         separateMappedAndUnmappedClasses: separateMappedAndUnmappedClasses,
+        analyzeThemesMappableClasses: analyzeThemesMappableClasses,
         logClassesToOutFile: logClassesToOutFile,
         glob: {
             loadLocalContents: AnalyzerGlob.loadLocalContents,
+            loadThemeCss: AnalyzerGlob.loadThemeCss,
         },
     }
 })()

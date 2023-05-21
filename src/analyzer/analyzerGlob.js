@@ -20,7 +20,7 @@ const AnalyzerGlob = (() => {
                 file !== "user.css" &&
                 file !== "colors.css"
             ) {
-                const fileContents = Glob.getFileContents(filePath)
+                const fileContents = Glob.get.fileContents(filePath)
 
                 if (fileExtension === ".css") {
                     Shared.xpui.cssContents += fileContents + "\n"
@@ -36,13 +36,13 @@ const AnalyzerGlob = (() => {
     function loadLocalCssMap() {
         console.log(chalk.blue("Reading css-map.json..."))
 
-        const rawCssMapContent = Glob.getFileContents(Shared.path.cssMap)
+        const rawCssMapContent = Glob.get.fileContents(Shared.path.cssMap)
         Shared.originalCssMap.data = JSON.parse(rawCssMapContent)
     }
 
     function loadDeprecatedCssMap() {
-        Shared.latestCssMap.classes.deprecated = Glob.getJsonObject("./src/public/deprecated-css-map.json")
-        Shared.latestCssMap.classes.maybeDeprecated = Glob.getJsonObject("./src/public/may-be-deprecated-css-map.json")
+        Shared.latestCssMap.classes.deprecated = Glob.get.json("./src/public/deprecated-css-map.json")
+        Shared.latestCssMap.classes.maybeDeprecated = Glob.get.json("./src/public/may-be-deprecated-css-map.json")
     }
 
     function loadLocalContents() {
@@ -56,8 +56,19 @@ const AnalyzerGlob = (() => {
         console.log()
     }
 
+    function loadThemeCss() {
+        console.log(chalk.blue("Reading Theme's CSS..."), "\n")
+
+        const themeCssContent = Glob.get.fileContents(
+            path.join(Shared.path.spicetifyUserDataPath, "Themes", Shared.spicetifyConfig.Setting.current_theme, "user.css")
+        )
+
+        Shared.theme.css = themeCssContent
+    }
+
     return {
         loadLocalContents: loadLocalContents,
+        loadThemeCss: loadThemeCss,
     }
 })()
 

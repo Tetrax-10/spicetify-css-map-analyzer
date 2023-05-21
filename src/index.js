@@ -7,11 +7,17 @@ import Path from "./utils/path.js"
 import Analyzer from "./analyzer/analyzer.js"
 
 program
-    .option("-u, --unmapped", "Prints only unmapped classes")
-    .option("-m, --mapped", "Prints only mapped classes")
+    .option("-u, --unmapped", "Prints unmapped classes")
+    .option("-m, --mapped", "Prints mapped classes")
+    .option("-t, --theme", "Prints mappable classes that are found in ")
     .option("-s, --sort", "Prints in sorted order")
-    .option("-o, --out", "Stores the output classes in a file")
+    .option("-o, --out", "Saves the output data in /out folder")
     .parse(process.argv)
+
+// display help and exit if no arguments provided
+if (process.argv.length <= 2) {
+    program.help()
+}
 
 // main function
 ;(async () => {

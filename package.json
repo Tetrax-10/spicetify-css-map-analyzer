@@ -18,16 +18,17 @@
         "analyze-mapped-css": "node src/index.js --mapped --sort --out",
         "analyze-unmapped-css": "node src/index.js --unmapped --sort --out",
         "analyze-css-map": "node src/index.js --mapped --unmapped --sort --out",
+        "analyze-theme": "node src/index.js --theme --sort --out",
         "analyzer": "node src/index.js"
     },
     "dependencies": {
         "chalk": "^5.2.0",
         "commander": "^10.0.1",
-        "ini": "^4.1.0"
+        "ini": "^4.1.0",
+        "prettier": "^2.8.8"
     },
     "devDependencies": {
         "eslint": "^8.40.0",
-        "eslint-plugin-import": "^2.27.5",
-        "prettier": "^2.8.8"
+        "eslint-plugin-import": "^2.27.5"
     }
 }

@@ -51,6 +51,14 @@ const Analyzer = (() => {
             }
         }
 
+        if (Shared.args.theme) {
+            AnalyzerUtils.glob.loadThemeCss()
+
+            AnalyzerUtils.analyzeThemesMappableClasses()
+
+            console.log(Shared.theme.filteredCssMap, "\n")
+        }
+
         AnalyzerUtils.logClassesToOutFile()
     }
 
