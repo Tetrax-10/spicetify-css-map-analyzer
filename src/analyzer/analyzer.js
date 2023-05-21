@@ -56,6 +56,15 @@ const Analyzer = (() => {
 
             AnalyzerUtils.analyzeThemesMappableClasses()
 
+            console.log(
+                chalk.yellow(
+                    `${Shared.spicetifyConfig.Setting.current_theme} Theme has ${Object.keys(Shared.theme.hashClasses).length} hash classes where ${
+                        Object.keys(Shared.theme.filteredCssMap).length
+                    } of them are mappable`
+                ),
+                "\n"
+            )
+
             console.log(Shared.theme.filteredCssMap, "\n")
         }
 
