@@ -93,3 +93,11 @@ These files are useful for comparing what got unmapped when comparing them with 
 **Eg: Comparing Spotify `1.2.10.760.g52970952` and `1.2.11.914.gd3175972`**
 
 ![compare output files](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/compare-output-files.png)
+
+<br />
+
+### Theme analyzer
+
+Lists mappable hash classes present in current theme
+
+![compare output files](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/theme-analyzer.png)
