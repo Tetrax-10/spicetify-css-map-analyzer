@@ -35,11 +35,11 @@ const AnalyzerUtils = (() => {
     }
 
     function analyzeThemesMappableClasses() {
-        Shared.theme.hashClasses = Shared.theme.css.match(Shared.regex.extractHashClass)
+        Shared.theme.hashClasses = [...new Set(Shared.theme.css.match(Shared.regex.extractHashClass))]
 
         Shared.theme.hashClasses.forEach((hashClass) => {
-            if (Shared.latestCssMap.data.hasOwnProperty(hashClass)) {
-                Shared.theme.filteredCssMap[hashClass] = Shared.latestCssMap.data[hashClass]
+            if (Shared.originalCssMap.data.hasOwnProperty(hashClass)) {
+                Shared.theme.filteredCssMap[hashClass] = Shared.originalCssMap.data[hashClass]
             }
         })
     }
