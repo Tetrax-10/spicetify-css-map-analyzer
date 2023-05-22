@@ -14,7 +14,13 @@ const Shared = {
     },
     theme: {
         css: "",
-        hashClasses: [],
+        hashClasses: {
+            all: [],
+            outDated: [],
+            stillAvailable: [],
+            deprecated: [],
+            maybeDeprecated: [],
+        },
         filteredCssMap: {},
     },
     originalCssMap: {
@@ -28,9 +34,12 @@ const Shared = {
             mapped: [], // latest mapped [ class-1, class-2, ... ]
             unmapped: [], // latest unmapped [ class-1, class-2, ... ]
             deprecated: [], // mappable classes that are deprecated (removed from Spotify) deprecated-css-map.json
-            reimplemented: [], // if Spotify reverts that deprecated class
             maybeDeprecated: [], // mappable classes that may be deprecated (removed from Spotify) may-be-deprecated-css-map.json
-            notDeprecated: [], // if Spotify reverts that deprecated class
+            notDeprecated: {
+                all: [],
+                reimplemented: [], // if Spotify reverts that deprecated class
+                reimplementedMayBeDeprecated: [], // if Spotify reverts that class which is probably considered as deprecated
+            },
         },
     },
     regex: {

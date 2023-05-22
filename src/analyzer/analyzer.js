@@ -23,31 +23,34 @@ const Analyzer = (() => {
         if (Shared.args.unmapped || Shared.args.mapped) {
             console.log(`Total mappable classes : ${totalClasses}`)
             console.log(chalk.red(`Unmapped classes : ${totalUnmappedClasses}`))
-            console.log(chalk.green(`Mapped classes : ${totalMappedClasses}\n`))
+            console.log(chalk.green(`Mapped classes : ${totalMappedClasses}`), "\n")
             console.log(
                 chalk.yellow(
                     `Spicetify devs have Mapped ${Math.floor((totalMappedClasses / totalClasses) * 100)}% of mappable classes in Spotify ${
                         Shared.spicetifyConfig.Backup.version
-                    }\n`
-                )
+                    }`
+                ),
+                "\n"
             )
 
-            if (Shared.latestCssMap.classes.notDeprecated.length) {
+            if (Shared.latestCssMap.classes.notDeprecated.reimplementedMayBeDeprecated.length) {
                 console.log(
                     `${chalk.red("These classes are not deprecated.")} ${chalk.yellow(
-                        `Remove them from ${chalk.blue("may-be-deprecated-css-map.json")}\n`
-                    )}`
+                        `Remove them from ${chalk.blue("may-be-deprecated-css-map.json")}`
+                    )}`,
+                    "\n"
                 )
-                console.log(Shared.latestCssMap.classes.notDeprecated, "\n")
+                console.log(Shared.latestCssMap.classes.notDeprecated.reimplementedMayBeDeprecated, "\n")
             }
 
-            if (Shared.latestCssMap.classes.reimplemented.length) {
+            if (Shared.latestCssMap.classes.notDeprecated.reimplemented.length) {
                 console.log(
                     `${chalk.red("These classes have been reimplemented.")} ${chalk.yellow(
-                        `Remove them from ${chalk.blue("deprecated-css-map.json")}\n`
-                    )}`
+                        `Remove them from ${chalk.blue("deprecated-css-map.json")}`
+                    )}`,
+                    "\n"
                 )
-                console.log(Shared.latestCssMap.classes.reimplemented, "\n")
+                console.log(Shared.latestCssMap.classes.notDeprecated.reimplemented, "\n")
             }
         }
 
@@ -56,16 +59,42 @@ const Analyzer = (() => {
 
             AnalyzerUtils.analyzeThemesMappableClasses()
 
-            console.log(
-                chalk.yellow(
-                    `${Shared.spicetifyConfig.Setting.current_theme} Theme has ${Object.keys(Shared.theme.hashClasses).length} hash classes where ${
-                        Object.keys(Shared.theme.filteredCssMap).length
-                    } of them are mappable`
-                ),
-                "\n"
-            )
+            const totalHashClasses = Object.keys(Shared.theme.hashClasses.all).length
+            const totalOutdatedHashClasses = Shared.theme.hashClasses.outDated.length
+            const totalStillAvailableHashClasses = Shared.theme.hashClasses.stillAvailable.length
 
-            console.log(Shared.theme.filteredCssMap, "\n")
+            console.log(`Total hash classes found in ${Shared.spicetifyConfig.Setting.current_theme} Theme : ${totalHashClasses}`)
+            console.log(chalk.red(`Outdated hash classes (not found in current xpui files) : ${totalOutdatedHashClasses}`))
+            console.log(chalk.green(`Still available hash classes : ${totalStillAvailableHashClasses}`), "\n")
+
+            const totalMappableClasses = Object.keys(Shared.theme.filteredCssMap).length
+
+            if (totalMappableClasses) {
+                console.log(
+                    chalk.yellow(`Found ${totalMappableClasses} mappable classes in ${Shared.spicetifyConfig.Setting.current_theme} Theme :`),
+                    "\n"
+                )
+
+                console.log(Shared.theme.filteredCssMap, "\n")
+            }
+
+            if (Shared.theme.hashClasses.deprecated.length) {
+                console.log(
+                    chalk.yellow(`These classes are deprecated. Remove them from ${Shared.spicetifyConfig.Setting.current_theme} Theme`),
+                    "\n"
+                )
+                console.log(chalk.red(Shared.theme.hashClasses.deprecated.join("\n")), "\n")
+            }
+
+            if (Shared.theme.hashClasses.maybeDeprecated.length) {
+                console.log(
+                    chalk.yellow(
+                        `These classes might have become deprecated. Think about removing them from ${Shared.spicetifyConfig.Setting.current_theme} Theme`
+                    ),
+                    "\n"
+                )
+                console.log(chalk.red(Shared.theme.hashClasses.maybeDeprecated.join("\n")), "\n")
+            }
         }
 
         AnalyzerUtils.logClassesToOutFile()

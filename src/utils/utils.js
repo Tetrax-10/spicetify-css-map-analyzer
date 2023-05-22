@@ -11,8 +11,13 @@ const Utils = (() => {
         return reversed
     }
 
+    function getAbsoluteRegex(str) {
+        return new RegExp("(?<!\\w|-)" + str + "(?!\\w|-)")
+    }
+
     return {
         reverseObject: reverseObject,
+        getAbsoluteRegex: getAbsoluteRegex,
     }
 })()
 
