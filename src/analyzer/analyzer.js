@@ -64,7 +64,9 @@ const Analyzer = (() => {
             const totalStillAvailableHashClasses = Shared.theme.hashClasses.stillAvailable.length
 
             console.log(`Total hash classes found in ${Shared.spicetifyConfig.Setting.current_theme} Theme : ${totalHashClasses}`)
-            console.log(chalk.red(`Outdated hash classes (not found in current xpui files) : ${totalOutdatedHashClasses}`))
+            console.log(
+                chalk.red(`Outdated hash classes (not found in Spotify ${Shared.spicetifyConfig.Backup.version}) : ${totalOutdatedHashClasses}`)
+            )
             console.log(chalk.green(`Still available hash classes : ${totalStillAvailableHashClasses}`), "\n")
 
             const totalMappableClasses = Object.keys(Shared.theme.filteredCssMap).length
