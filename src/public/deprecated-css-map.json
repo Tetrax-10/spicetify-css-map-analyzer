@@ -1,4 +1,6 @@
 [
+    "Root__top-container--transition-enter",
+    "Root__top-container--transition-exit",
     "folder-folder-UpgradeButton",
     "main-button-outlined",
     "main-button-primary",
@@ -13,6 +15,7 @@
     "main-entityTitle-small",
     "main-entityTitle-subtitle",
     "main-entityTitle-uppercase",
+    "main-nowPlayingView-container",
     "main-topBar-buttonActive",
     "main-topBar-center",
     "main-topBar-entryPoints",
