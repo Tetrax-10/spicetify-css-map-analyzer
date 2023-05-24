@@ -29,6 +29,7 @@ If you want to analyze older versions of Spotify, then install the appropriate v
 -   Just clone `spicetify-cli` repo by `git clone https://github.com/spicetify/spicetify-cli`
 -   Choose the version you wanna install with `VScode branches`
 -   then run `go build -o spicetify.exe` to build Spicetify
+-   then cd to `spicetify-css-map-analyzer` and run `npm run analyze-css-map`
 
 ![install older spicetify versions](https://raw.githubusercontent.com/Tetrax-10/spicetify-css-map-analyzer/main/assets/install-older-spicetify-versions.png)
 
@@ -37,6 +38,12 @@ If you want to analyze older versions of Spotify, then install the appropriate v
 <br />
 
 ## Usage :
+
+To analyze and print all classes in `css-map.json` for currently installed Spotify and Spicetify versions
+
+```sh
+npm run analyze-css-map
+```
 
 To analyze and print unmapped classes in `css-map.json` for currently installed Spotify and Spicetify versions
 
@@ -50,12 +57,6 @@ To analyze and print mapped classes in `css-map.json` for currently installed Sp
 npm run analyze-mapped-css
 ```
 
-To analyze and print all classes in `css-map.json` for currently installed Spotify and Spicetify versions
-
-```sh
-npm run analyze-css-map
-```
-
 <br />
 
 Run help command to see available options
@@ -67,7 +68,7 @@ npm run analyzer -- --help
 Run custom combination commands like this `npm run analyzer -- [args]`
 
 ```sh
-npm run analyzer -- --mapped --sort --out
+npm run analyzer -- --unmapped --theme --sort --out
 ```
 
 <br />
