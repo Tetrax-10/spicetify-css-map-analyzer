@@ -7,14 +7,16 @@ import Utils from "../utils/utils.js"
 
 const AnalyzerUtils = (() => {
     function separateMappedAndUnmappedClasses() {
-        console.log(chalk.yellow(`Analyzing Spotify ${Shared.spicetifyConfig.Backup.version}'s css with css-map.json...`), "\n")
+        const spotifyVersion = Shared.spicetifyConfig.Backup.version
+
+        console.log(chalk.yellow(`Analyzing Spotify ${spotifyVersion}'s css with css-map.json...`), "\n")
 
         if (Shared.args.unmapped && !Shared.args.mapped) {
-            console.log(chalk.yellow(`Unmapped classes in Spotify ${Shared.spicetifyConfig.Backup.version}`), "\n")
+            console.log(chalk.yellow(`Unmapped classes in Spotify ${spotifyVersion}`), "\n")
         } else if (Shared.args.mapped && !Shared.args.unmapped) {
-            console.log(chalk.yellow(`Mapped classes in Spotify ${Shared.spicetifyConfig.Backup.version}`), "\n")
+            console.log(chalk.yellow(`Mapped classes in Spotify ${spotifyVersion}`), "\n")
         } else if (Shared.args.unmapped && Shared.args.mapped) {
-            console.log(chalk.yellow(`All mappable classes in Spotify ${Shared.spicetifyConfig.Backup.version}`), "\n")
+            console.log(chalk.yellow(`All mappable classes in Spotify ${spotifyVersion}`), "\n")
         }
 
         Shared.latestCssMap.classes.all.forEach((mappedClass) => {
@@ -90,24 +92,29 @@ const AnalyzerUtils = (() => {
             Glob.create.folder("./out")
         }
 
+        const spotifyVersion = Shared.spicetifyConfig.Backup.version
+
         if (Shared.args.unmapped && Shared.latestCssMap.classes.unmapped.length) {
-            Glob.write.file(`./out/unmapped-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.latestCssMap.classes.unmapped.join("\n"))
+            Glob.write.file(`./out/unmapped-classes-${spotifyVersion}.txt`, Shared.latestCssMap.classes.unmapped.join("\n"))
         }
         if (Shared.args.mapped && Shared.latestCssMap.classes.mapped.length) {
-            Glob.write.file(`./out/mapped-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.latestCssMap.classes.mapped.join("\n"))
+            Glob.write.file(`./out/mapped-classes-${spotifyVersion}.txt`, Shared.latestCssMap.classes.mapped.join("\n"))
         }
         if (Shared.args.unmapped && Shared.args.mapped && Shared.latestCssMap.classes.notDeprecated.all.length) {
-            Glob.write.file(
-                `./out/all-classes-${Shared.spicetifyConfig.Backup.version}.txt`,
-                Shared.latestCssMap.classes.notDeprecated.all.join("\n")
-            )
+            Glob.write.file(`./out/all-classes-${spotifyVersion}.txt`, Shared.latestCssMap.classes.notDeprecated.all.join("\n"))
         }
         if (Shared.args.theme) {
             if (Shared.theme.hashClasses.all.length) {
-                Glob.write.file(`./out/theme-hash-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.theme.hashClasses.all.join("\n"))
+                Glob.write.file(`./out/theme-hash-classes-${spotifyVersion}.txt`, Shared.theme.hashClasses.all.join("\n"))
             }
             if (Object.keys(Shared.theme.filteredCssMap).length) {
-                Glob.write.json(`./out/mappable-theme-hash-classes-${Shared.spicetifyConfig.Backup.version}.json`, Shared.theme.filteredCssMap)
+                Glob.write.json(`./out/mappable-theme-hash-classes-${spotifyVersion}.json`, Shared.theme.filteredCssMap)
+            }
+            if (Shared.theme.hashClasses.deprecated.length) {
+                Glob.write.file(`./out/theme-deprecated-classes-${spotifyVersion}.txt`, Shared.theme.hashClasses.deprecated.join("\n"))
+            }
+            if (Shared.theme.hashClasses.maybeDeprecated.length) {
+                Glob.write.file(`./out/theme-maybeDeprecated-classes-${spotifyVersion}.txt`, Shared.theme.hashClasses.maybeDeprecated.join("\n"))
             }
         }
     }
