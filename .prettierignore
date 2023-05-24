@@ -4,3 +4,4 @@ LICENSE
 package-lock.json
 node_modules
 *.txt
+dev
