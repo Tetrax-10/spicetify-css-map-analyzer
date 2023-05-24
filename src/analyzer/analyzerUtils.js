@@ -90,21 +90,25 @@ const AnalyzerUtils = (() => {
             Glob.create.folder("./out")
         }
 
-        if (Shared.args.unmapped) {
+        if (Shared.args.unmapped && Shared.latestCssMap.classes.unmapped.length) {
             Glob.write.file(`./out/unmapped-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.latestCssMap.classes.unmapped.join("\n"))
         }
-        if (Shared.args.mapped) {
+        if (Shared.args.mapped && Shared.latestCssMap.classes.mapped.length) {
             Glob.write.file(`./out/mapped-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.latestCssMap.classes.mapped.join("\n"))
         }
-        if (Shared.args.unmapped && Shared.args.mapped) {
+        if (Shared.args.unmapped && Shared.args.mapped && Shared.latestCssMap.classes.notDeprecated.all.length) {
             Glob.write.file(
                 `./out/all-classes-${Shared.spicetifyConfig.Backup.version}.txt`,
                 Shared.latestCssMap.classes.notDeprecated.all.join("\n")
             )
         }
         if (Shared.args.theme) {
-            Glob.write.file(`./out/theme-hash-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.theme.hashClasses.all.join("\n"))
-            Glob.write.json(`./out/mappable-theme-hash-classes-${Shared.spicetifyConfig.Backup.version}.json`, Shared.theme.filteredCssMap)
+            if (Shared.theme.hashClasses.all.length) {
+                Glob.write.file(`./out/theme-hash-classes-${Shared.spicetifyConfig.Backup.version}.txt`, Shared.theme.hashClasses.all.join("\n"))
+            }
+            if (Object.keys(Shared.theme.filteredCssMap).length) {
+                Glob.write.json(`./out/mappable-theme-hash-classes-${Shared.spicetifyConfig.Backup.version}.json`, Shared.theme.filteredCssMap)
+            }
         }
     }
 
