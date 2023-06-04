@@ -57,6 +57,12 @@ To analyze and print mapped classes in `css-map.json` for currently installed Sp
 npm run analyze-mapped-css
 ```
 
+To analyze and print mappable hash classes present in current theme for currently installed Spotify and Spicetify versions. Also prints unfound hash classes and deprecated classes used in the current theme.
+
+```sh
+npm run analyze-theme
+```
+
 <br />
 
 Run help command to see available options
