@@ -56,6 +56,7 @@ const AnalyzerUtils = (() => {
         Shared.theme.hashClasses.all.forEach((hashClass) => {
             if (Shared.originalCssMap.data.hasOwnProperty(hashClass)) {
                 Shared.theme.filteredCssMap[hashClass] = Shared.originalCssMap.data[hashClass]
+                console.log(chalk.yellow(hashClass))
                 return
             }
 
