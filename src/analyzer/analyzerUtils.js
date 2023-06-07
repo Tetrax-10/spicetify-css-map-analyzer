@@ -72,14 +72,14 @@ const AnalyzerUtils = (() => {
         Shared.latestCssMap.classes.deprecated.forEach((mappedClass) => {
             // deprecated class found in theme
             if (Shared.theme.css.match(Utils.getAbsoluteRegex(mappedClass)) !== null) {
-                Shared.theme.hashClasses.deprecated.push(mappedClass)
+                Shared.theme.classes.deprecated.push(mappedClass)
             }
         })
 
         Shared.latestCssMap.classes.maybeDeprecated.forEach((mappedClass) => {
             // maybe deprecated class found in theme
             if (Shared.theme.css.match(Utils.getAbsoluteRegex(mappedClass)) !== null) {
-                Shared.theme.hashClasses.maybeDeprecated.push(mappedClass)
+                Shared.theme.classes.maybeDeprecated.push(mappedClass)
             }
         })
 
@@ -111,11 +111,11 @@ const AnalyzerUtils = (() => {
             if (Object.keys(Shared.theme.filteredCssMap).length) {
                 Glob.write.json(`./out/mappable-theme-hash-classes-${spotifyVersion}.json`, Shared.theme.filteredCssMap)
             }
-            if (Shared.theme.hashClasses.deprecated.length) {
-                Glob.write.file(`./out/theme-deprecated-classes-${spotifyVersion}.txt`, Shared.theme.hashClasses.deprecated.join("\n"))
+            if (Shared.theme.classes.deprecated.length) {
+                Glob.write.file(`./out/theme-deprecated-classes-${spotifyVersion}.txt`, Shared.theme.classes.deprecated.join("\n"))
             }
-            if (Shared.theme.hashClasses.maybeDeprecated.length) {
-                Glob.write.file(`./out/theme-maybeDeprecated-classes-${spotifyVersion}.txt`, Shared.theme.hashClasses.maybeDeprecated.join("\n"))
+            if (Shared.theme.classes.maybeDeprecated.length) {
+                Glob.write.file(`./out/theme-maybeDeprecated-classes-${spotifyVersion}.txt`, Shared.theme.classes.maybeDeprecated.join("\n"))
             }
         }
     }

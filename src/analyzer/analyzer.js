@@ -61,15 +61,15 @@ const Analyzer = (() => {
 
             const totalHashClasses = Object.keys(Shared.theme.hashClasses.all).length
             const totalOutdatedHashClasses = Shared.theme.hashClasses.outDated.length
+            const totalMappableClasses = Object.keys(Shared.theme.filteredCssMap).length
             const totalStillAvailableHashClasses = Shared.theme.hashClasses.stillAvailable.length
 
             console.log(`Total hash classes found in ${Shared.spicetifyConfig.Setting.current_theme} Theme : ${totalHashClasses}`)
             console.log(
                 chalk.red(`Outdated hash classes (not found in Spotify ${Shared.spicetifyConfig.Backup.version}) : ${totalOutdatedHashClasses}`)
             )
+            console.log(chalk.yellow(`Mappable hash classes : ${totalMappableClasses}`))
             console.log(chalk.green(`Still available hash classes : ${totalStillAvailableHashClasses}`), "\n")
-
-            const totalMappableClasses = Object.keys(Shared.theme.filteredCssMap).length
 
             if (totalMappableClasses) {
                 console.log(
@@ -80,22 +80,22 @@ const Analyzer = (() => {
                 console.log(Shared.theme.filteredCssMap, "\n")
             }
 
-            if (Shared.theme.hashClasses.deprecated.length) {
+            if (Shared.theme.classes.deprecated.length) {
                 console.log(
                     chalk.yellow(`These classes are deprecated. Remove them from ${Shared.spicetifyConfig.Setting.current_theme} Theme`),
                     "\n"
                 )
-                console.log(chalk.red(Shared.theme.hashClasses.deprecated.join("\n")), "\n")
+                console.log(chalk.red(Shared.theme.classes.deprecated.join("\n")), "\n")
             }
 
-            if (Shared.theme.hashClasses.maybeDeprecated.length) {
+            if (Shared.theme.classes.maybeDeprecated.length) {
                 console.log(
                     chalk.yellow(
                         `These classes might have become deprecated. Think about removing them from ${Shared.spicetifyConfig.Setting.current_theme} Theme`
                     ),
                     "\n"
                 )
-                console.log(chalk.red(Shared.theme.hashClasses.maybeDeprecated.join("\n")), "\n")
+                console.log(chalk.red(Shared.theme.classes.maybeDeprecated.join("\n")), "\n")
             }
         }
 

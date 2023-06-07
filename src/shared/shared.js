@@ -15,13 +15,15 @@ const Shared = {
     theme: {
         css: "",
         hashClasses: {
-            all: [],
-            outDated: [],
-            stillAvailable: [],
-            deprecated: [],
-            maybeDeprecated: [],
+            all: [], // all hash classes present in user.css
+            outDated: [], // hash classes that got removed or updated to another hash
+            stillAvailable: [], // hash classes that is still present in current xpui files
         },
-        filteredCssMap: {},
+        classes: {
+            deprecated: [], // mappable classes that are deprecated and present in user.css (removed from Spotify) deprecated-css-map.json
+            maybeDeprecated: [], // mappable classes that may be deprecated and present in user.css (removed from Spotify) may-be-deprecated-css-map.json
+        },
+        filteredCssMap: {}, // mappable hash classes { hash: class, ... }
     },
     originalCssMap: {
         data: {}, // css-map.json as object
