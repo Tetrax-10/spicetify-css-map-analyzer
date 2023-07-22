@@ -1,3 +1,5 @@
+# 📦 Archiving this repo due to time constraints. Feel free to fork and continue the development! 🍴
+
 # Spicetify css-map Analyzer
 
 Analyzes Spicetify's css-map.json and prints mapped, unmapped classes for current Spotify version
